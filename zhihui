@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧助老中心 - 让科技更简单</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "SimHei", Arial, sans-serif;
+            font-size: 20px;
+            line-height: 1.8;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* 顶部导航 */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 24px;
+            opacity: 0.95;
+        }
+
+        /* 快捷导航 */
+        .quick-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px 20px;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 20px 40px;
+            font-size: 22px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 180px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .nav-btn:hover {
+            background: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn.secondary {
+            background: #2196F3;
+        }
+
+        .nav-btn.secondary:hover {
+            background: #0b7dda;
+        }
+
+        .nav-btn.tertiary {
+            background: #FF9800;
+        }
+
+        .nav-btn.tertiary:hover {
+            background: #e68900;
+        }
+
+        /* 主内容区 */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* 内容卡片 */
+        .content-section {
+            background: white;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .content-section h2 {
+            font-size: 36px;
+            color: #667eea;
+            margin-bottom: 25px;
+            border-left: 6px solid #667eea;
+            padding-left: 20px;
+        }
+
+        /* 教程列表 */
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .tutorial-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .tutorial-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        .tutorial-card h3 {
+            font-size: 26px;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tutorial-card p {
+            font-size: 20px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .icon {
+            font-size: 32px;
+            margin-right: 12px;
+        }
+
+        /* 常见问题 */
+        .faq-item {
+            background: #f9f9f9;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #4CAF50;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            background: #f0f0f0;
+            border-left-color: #45a049;
+        }
+
+        .faq-question {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .faq-answer {
+            font-size: 20px;
+            color: #666;
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed #ddd;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* 联系我们 */
+        .contact-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .contact-box h2 {
+            color: white;
+            border: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            font-size: 26px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .help-btn {
+            background: white;
+            color: #667eea;
+            padding: 20px 50px;
+            font-size: 24px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .help-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255,255,255,0.4);
+        }
+
+        /* 底部 */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            font-size: 20px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .tutorial-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-btn {
+                width: 100%;
+            }
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: #667eea;
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .back-to-top:hover {
+            background: #764ba2;
+            transform: translateY(-5px);
+        }
+
+        .back-to-top.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <h1>🌟 智慧助老中心 🌟</h1>
+        <p>让智能手机使用更简单，让数字生活更便捷</p>
+    </div>
+
+    <!-- 快捷导航 -->
+    <div class="quick-nav">
+        <button class="nav-btn" onclick="scrollToSection('tutorials')">📱 手机教程</button>
+        <button class="nav-btn secondary" onclick="scrollToSection('apps')">📲 常用软件</button>
+        <button class="nav-btn tertiary" onclick="scrollToSection('faq')">❓ 常见问题</button>
+        <button class="nav-btn" onclick="scrollToSection('contact')">📞 在线咨询</button>
+    </div>
+
+    <!-- 主内容 -->
+    <div class="container">
+        <!-- 手机基础教程 -->
+        <div class="content-section" id="tutorials">
+            <h2>📱 手机基础教程</h2>
+            <p style="font-size: 22px; color: #666; margin-bottom: 20px;">从零开始，轻松学会使用智能手机</p>
+            
+            <div class="tutorial-grid">
+                <div class="tutorial-card" onclick="alert('视频教程即将播放')">
+                    <h3><span class="icon">🔋</span>开关机与充电</h3>
+                    <p>学习如何正确开关机、充电和保养手机电池</p>
+                </div>
+                
+                <div class="tutorial-card" onclick="alert('视频教程即将播放')">
+                    <h3><span class="icon">📞</span>拨打与接听电话</h3>
+                    <p>掌握接听电话、拨号、通讯录使用技巧</p>
+                </div>
+                
+                <div class="tutorial-card" onclick="alert('视频教程即将播放')">
+                    <h3><span class="icon">💬</span>发送短信与微信</h3>
+                    <p>学会发短信、使用微信聊天、发语音</p>
+                </div>
+                
+                <div class="tutorial-card" onclick="alert('视频教程即将播放')">
+                    <h3><span class="icon">📷</span>拍照与相册</h3>
+                    <p>学习拍照、查看照片、分享照片给家人</p>
+                </div>
+                
+                <div class="tutorial-card" onclick="alert('视频教程即将播放')">
+                    <h3><span class="icon">🔊</span>调节音量与铃声</h3>
+                    <p>设置铃声、调整音量、勿扰模式使用</p>
+                </div>
+                
+                <div class="tutorial-card" onclick="alert('视频教程即将播放')">
+                    <h3><span class="icon">🌐</span>连接WiFi上网</h3>
+                    <p>学会连接家里的WiFi，安全上网</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 常用软件教程 -->
+        <div class="content-section" id="apps">
+            <h2>📲 常用软件使用指南</h2>
+            <p style="font-size: 22px; color: #666; margin-bottom: 20px;">详细的APP使用教程，一步一步教您操作</p>
+            
+            <div class="tutorial-grid">
+                <div class="tutorial-card" onclick="alert('微信教程即将播放')">
+                    <h3><span class="icon">💚</span>微信使用大全</h3>
+                    <p>聊天、视频通话、发朋友圈、微信支付</p>
+                </div>
+                
+                <div class="tutorial-card" onclick="alert('支付宝教程即将播放')">
+                    <h3><span class="icon">💙</span>支付宝指南</h3>
+                    <p>扫码支付、生活缴费、健康码使用</p>
+                </div>
+                
+                <div class="tutorial-card" onclick="alert('抖音教程即将播放')">
+                    <h3><span class="icon">🎵</span>抖音快手</h3>
+                    <p>观看视频、点赞评论、关注喜欢的作者</p>
+                </div>
+                
+                <div class="tutorial-card" onclick="alert('地图教程即将播放')">
+                    <h3><span class="icon">🗺️</span>地图导航</h3>
+                    <p>查找地点、规划路线、公交地铁查询</p>
+                </div>
+                
+                <div class="tutorial-card" onclick="alert('购物教程即将播放')">
+                    <h3><span class="icon">🛒</span>网上购物</h3>
+                    <p>淘宝、京东、拼多多购物下单教程</p>
+                </div>
+                
+                <div class="tutorial-card" onclick="alert('挂号教程即将播放')">
+                    <h3><span class="icon">🏥</span>预约挂号</h3>
+                    <p>医院挂号、查看报告、在线问诊</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 常见问题 -->
+        <div class="content-section" id="faq">
+            <h2>❓ 常见问题解答</h2>
+            <p style="font-size: 22px; color: #666; margin-bottom: 20px;">点击问题查看详细解答</p>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">🔒 手机密码忘记了怎么办？</div>
+                <div class="faq-answer">
+                    如果忘记了手机密码，可以尝试以下方法：<br>
+                    1. 使用指纹或人脸解锁（如果已设置）<br>
+                    2. 通过"忘记密码"功能，使用绑定的手机号或邮箱重置<br>
+                    3. 联系手机品牌客服或到售后服务中心寻求帮助<br>
+                    建议：将密码写在纸上放在安全的地方备用
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">📱 手机内存不足怎么清理？</div>
+                <div class="faq-answer">
+                    清理手机内存的方法：<br>
+                    1. 删除不常用的APP应用程序<br>
+                    2. 清理微信、QQ等软件的缓存数据<br>
+                    3. 删除重复的照片和视频<br>
+                    4. 使用手机自带的"清理加速"功能<br>
+                    5. 定期清空"最近删除"相册
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">💰 微信支付安全吗？如何使用？</div>
+                <div class="faq-answer">
+                    微信支付是安全的，使用方法：<br>
+                    1. 绑定银行卡时务必使用本人的卡<br>
+                    2. 设置支付密码，不要告诉任何人<br>
+                    3. 扫码支付时先确认金额再输入密码<br>
+                    4. 开启小额免密支付更方便（可设置单笔限额）<br>
+                    5. 定期查看账单，发现异常及时联系客服
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">📶 WiFi和流量有什么区别？</div>
+                <div class="faq-answer">
+                    WiFi和流量的区别：<br>
+                    <strong>WiFi：</strong>在家或公共场所连接，免费使用，速度快，建议优先使用<br>
+                    <strong>流量：</strong>手机卡提供，有流量限制，超出后会额外收费<br>
+                    <strong>省流量小技巧：</strong><br>
+                    - 在家尽量使用WiFi<br>
+                    - 关闭不用的APP后台运行<br>
+                    - 不看视频时关闭自动播放
+                </div>
+            </div>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">🔊 收不到电话或短信怎么办？</div>
+                <div class="faq-answer">
+                    检查以下几点：<br>
+                    1. 查看手机是否开启了飞行模式（关闭它）<br>
+                    2. 检查手机信号是否正常（屏幕顶部信号格）<br>
+                    3. 确认是否设置了勿扰模式或黑名单<br>
+                    4. 查看手机欠费情况<br>
+                    5. 重启手机试试<br>
+                    如果仍有问题，请联系运营商客服
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">📸 照片太多如何备份和管理？</div>
+                <div class="faq-answer">
+                    照片管理建议：<br>
+                    1. 使用手机自带的云相册自动备份<br>
+                    2. 定期将照片传到电脑保存<br>
+                    3. 删除模糊、重复的照片<br>
+                    4. 创建相册分类整理（如：家人、旅游、风景）<br>
+                    5. 重要照片可以洗印出来保存
+                </div>
+            </div>
+        </div>
+
+        <!-- 在线咨询 -->
+        <div class="content-section" id="contact">
+            <div class="contact-box">
+                <h2>📞 需要帮助？我们随时为您服务</h2>
+                <div class="contact-info">☎️ 咨询热线：400-XXX-XXXX</div>
+                <div class="contact-info">⏰ 服务时间：每天 8:00 - 20:00</div>
+                <div class="contact-info">💬 微信客服：扫码添加客服微信</div>
+                <button class="help-btn" onclick="alert('客服正在连接中，请稍候...')">立即咨询</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer">
+        <p>智慧助老中心 © 2024 | 让科技服务更温暖</p>
+        <p style="margin-top: 10px;">用心服务每一位老年朋友</p>
+    </div>
+
+    <!-- 返回顶部 -->
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // 平滑滚动到指定区域
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // 返回顶部
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 显示/隐藏返回顶部按钮
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // FAQ折叠功能
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+        }
+
+        // 欢迎提示
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                alert('欢迎来到智慧助老中心！\n\n这里有详细的手机使用教程，\n遇到问题随时联系我们。\n\n字体太小？可以按住Ctrl键，\n同时滚动鼠标滚轮放大页面哦！');
+            }, 500);
+        });
+    </script>
+</body>
+</html>
